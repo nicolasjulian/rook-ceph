@@ -10,7 +10,7 @@ data:
 
     # Add package for disk utility
     apk update
-    apk add --no-cache parted coreutils util-linux blkid
+    apk add --no-cache parted coreutils util-linux blkid sgdisk
 
     ls /var/lib/rook/
     # Remove all files and directories inside /var/lib/rook
