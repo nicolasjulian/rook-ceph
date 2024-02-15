@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: disk-preparation-script
+  namespace: default # Adjust if necessary
+data:
+  prepare_disk.sh: |
+    #!/bin/sh
+    set -x
+    
+    # Add package for disk utility
+    apk update
+    apk add --no-cache parted coreutils util-linux blkid
+
+    # Remove all files and directories inside /var/lib/rook
+    rm -rf /var/lib/rook/*
+
+    # Split DISK environment variable into an array of disks
+    IFS=',' read -r -a disks <<< "$DISK"
+
+    for disk in "${disks[@]}"; do
+      disk=$(echo $disk | xargs)  # Trim whitespace
+
+      # Zap the disk to a fresh, usable state (zap-all is important, b/c MBR has to be clean)
+      sgdisk --zap-all $disk
+
+      # Wipe a large portion of the beginning of the disk to remove more LVM metadata that may be present
+      dd if=/dev/zero of="$disk" bs=1M count=100 oflag=direct,dsync
+
+      # SSDs may be better cleaned with blkdiscard instead of dd
+      blkdiscard $disk
+
+      # Inform the OS of partition table changes
+      partprobe $disk
+
+    done
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: disk-preparation
+  namespace: default 
+spec:
+  selector:
+    matchLabels:
+      name: disk-preparation
+  template:
+    metadata:
+      labels:
+        name: disk-preparation
+    spec:
+      hostPID: true
+      containers:
+      - name: disk-preparation
+        image: "alpine:latest" 
+        securityContext:
+          privileged: true
+        env:
+        - name: DISK
+          value: "/dev/sdx,/dev/sdz"  # No spaces after commas
+        command: ["/bin/sh"]
+        args: ["-c", "sh /scripts/prepare_disk.sh"]
+        volumeMounts:
+        - name: script
+          mountPath: /scripts
+        - name: dev
+          mountPath: /dev
+        - name: var-lib-rook
+          mountPath: /var/lib/rook
+      volumes:
+      - name: script
+        configMap:
+          name: disk-preparation-script
+      - name: dev
+        hostPath:
+          path: /dev
+      - name: var-lib-rook
+        hostPath:
+          path: /var/lib/rook

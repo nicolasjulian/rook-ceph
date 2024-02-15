@@ -1,0 +1,43 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: ceph-public-net
+spec:
+  config: '{
+  	"cniVersion": "0.3.1",
+  	"type": "macvlan",
+  	"master": "ens4",
+  	"mode": "bridge",
+	"ipam": {
+	    "type": "host-local",
+	    "ranges": [
+		[ {
+		     "subnet": "12.10.0.0/16",
+		     "rangeStart": "12.10.1.20",
+		     "rangeEnd": "12.10.3.50"
+		} ]
+	    ]
+	}
+    }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: ceph-cluster-net
+spec:
+  config: '{
+  	"cniVersion": "0.3.1",
+  	"type": "macvlan",
+  	"master": "ens5",
+  	"mode": "bridge",
+	"ipam": {
+	    "type": "host-local",
+	    "ranges": [
+		[ {
+		     "subnet": "12.20.0.0/16",
+		     "rangeStart": "12.20.1.20",
+		     "rangeEnd": "12.20.3.50"
+		} ]
+	    ]
+	}
+    }'
