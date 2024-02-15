@@ -5,13 +5,14 @@ metadata:
   namespace: default # Adjust if necessary
 data:
   prepare_disk.sh: |
-    #!/bin/sh
+    #!/bin/bash
     set -x
-    
+
     # Add package for disk utility
     apk update
     apk add --no-cache parted coreutils util-linux blkid
 
+    ls /var/lib/rook/
     # Remove all files and directories inside /var/lib/rook
     rm -rf /var/lib/rook/*
 
@@ -39,7 +40,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: disk-preparation
-  namespace: default 
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -52,14 +53,13 @@ spec:
       hostPID: true
       containers:
       - name: disk-preparation
-        image: "alpine:latest" 
+        image: "bash:4.1-alpine3.19"
         securityContext:
           privileged: true
         env:
         - name: DISK
-          value: "/dev/sdx,/dev/sdz"  # No spaces after commas
-        command: ["/bin/sh"]
-        args: ["-c", "sh /scripts/prepare_disk.sh"]
+          value: "/dev/vdb,/dev/vdc"  # No spaces after commas
+        command: ["bash", "/scripts/prepare_disk.sh"]
         volumeMounts:
         - name: script
           mountPath: /scripts
