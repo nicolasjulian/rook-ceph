@@ -1,0 +1,3635 @@
+payload:
+  allShortcutsEnabled: false
+  fileTree:
+    deploy/charts/rook-ceph:
+      items:
+        - name: charts
+          path: deploy/charts/rook-ceph/charts
+          contentType: directory
+        - name: templates
+          path: deploy/charts/rook-ceph/templates
+          contentType: directory
+        - name: .helmignore
+          path: deploy/charts/rook-ceph/.helmignore
+          contentType: file
+        - name: Chart.yaml
+          path: deploy/charts/rook-ceph/Chart.yaml
+          contentType: file
+        - name: README.md
+          path: deploy/charts/rook-ceph/README.md
+          contentType: file
+        - name: values.yaml
+          path: deploy/charts/rook-ceph/values.yaml
+          contentType: file
+      totalCount: 6
+    deploy/charts:
+      items:
+        - name: library
+          path: deploy/charts/library
+          contentType: directory
+        - name: rook-ceph-cluster
+          path: deploy/charts/rook-ceph-cluster
+          contentType: directory
+        - name: rook-ceph
+          path: deploy/charts/rook-ceph
+          contentType: directory
+      totalCount: 3
+    deploy:
+      items:
+        - name: charts
+          path: deploy/charts
+          contentType: directory
+        - name: examples
+          path: deploy/examples
+          contentType: directory
+        - name: olm
+          path: deploy/olm
+          contentType: directory
+      totalCount: 3
+    "":
+      items:
+        - name: .docs
+          path: .docs
+          contentType: directory
+        - name: .github
+          path: .github
+          contentType: directory
+        - name: .vscode
+          path: .vscode
+          contentType: directory
+        - name: Documentation
+          path: Documentation
+          contentType: directory
+        - name: build
+          path: build
+          contentType: directory
+        - name: cmd
+          path: cmd
+          contentType: directory
+        - name: deploy
+          path: deploy
+          contentType: directory
+        - name: design
+          path: design
+          contentType: directory
+        - name: images
+          path: images
+          contentType: directory
+        - name: pkg
+          path: pkg
+          contentType: directory
+        - name: tests
+          path: tests
+          contentType: directory
+        - name: .commitlintrc.json
+          path: .commitlintrc.json
+          contentType: file
+        - name: .gitignore
+          path: .gitignore
+          contentType: file
+        - name: .mergify.yml
+          path: .mergify.yml
+          contentType: file
+        - name: .snyk
+          path: .snyk
+          contentType: file
+        - name: ADOPTERS.md
+          path: ADOPTERS.md
+          contentType: file
+        - name: CODE-OWNERS
+          path: CODE-OWNERS
+          contentType: file
+        - name: CODE_OF_CONDUCT.md
+          path: CODE_OF_CONDUCT.md
+          contentType: file
+        - name: CONTRIBUTING.md
+          path: CONTRIBUTING.md
+          contentType: file
+        - name: DCO
+          path: DCO
+          contentType: file
+        - name: GOVERNANCE.md
+          path: GOVERNANCE.md
+          contentType: file
+        - name: INSTALL.md
+          path: INSTALL.md
+          contentType: file
+        - name: LICENSE
+          path: LICENSE
+          contentType: file
+        - name: Makefile
+          path: Makefile
+          contentType: file
+        - name: OWNERS.md
+          path: OWNERS.md
+          contentType: file
+        - name: PendingReleaseNotes.md
+          path: PendingReleaseNotes.md
+          contentType: file
+        - name: README.md
+          path: README.md
+          contentType: file
+        - name: ROADMAP.md
+          path: ROADMAP.md
+          contentType: file
+        - name: SECURITY.md
+          path: SECURITY.md
+          contentType: file
+        - name: go.mod
+          path: go.mod
+          contentType: file
+        - name: go.sum
+          path: go.sum
+          contentType: file
+        - name: mkdocs.yml
+          path: mkdocs.yml
+          contentType: file
+      totalCount: 32
+  fileTreeProcessingTime: 13.314915000000001
+  foldersToFetch: []
+  repo:
+    id: 62921553
+    defaultBranch: master
+    name: rook
+    ownerLogin: rook
+    currentUserCanPush: false
+    isFork: false
+    isEmpty: false
+    createdAt: "2016-07-08T22:45:05.000Z"
+    ownerAvatar: https://avatars.githubusercontent.com/u/22860722?v=4
+    public: true
+    private: false
+    isOrgOwned: true
+  symbolsExpanded: false
+  treeExpanded: true
+  refInfo:
+    name: release-1.13
+    listCacheKey: v0:1707518142.0
+    canEdit: false
+    refType: branch
+    currentOid: cd11d3c0c30aabc97a17ae67c79697112840c4d4
+  path: deploy/charts/rook-ceph/values.yaml
+  currentUser: null
+  blob:
+    rawLines:
+      - '# Default values for rook-ceph-operator'
+      - '# This is a YAML-formatted file.'
+      - '# Declare variables to be passed into your templates.'
+      - ""
+      - 'image:'
+      - '  # -- Image'
+      - '  repository: rook/ceph'
+      - '  # -- Image tag'
+      - '  # @default -- `master`'
+      - '  tag: master'
+      - '  # -- Image pull policy'
+      - '  pullPolicy: IfNotPresent'
+      - ""
+      - 'crds:'
+      - '  # -- Whether the helm chart should create and update the CRDs. If false, the CRDs must be'
+      - '  # managed independently with deploy/examples/crds.yaml.'
+      - '  # **WARNING** Only set during first deployment. If later disabled the cluster may be DESTROYED.'
+      - '  # If the CRDs are deleted in this case, see'
+      - '  # [the disaster recovery guide](https://rook.io/docs/rook/latest/Troubleshooting/disaster-recovery/#restoring-crds-after-deletion)'
+      - '  # to restore them.'
+      - '  enabled: true'
+      - ""
+      - '# -- Pod resource requests & limits'
+      - 'resources:'
+      - '  limits:'
+      - '    memory: 512Mi'
+      - '  requests:'
+      - '    cpu: 200m'
+      - '    memory: 128Mi'
+      - ""
+      - '# -- Kubernetes [`nodeSelector`](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector) to add to the Deployment.'
+      - 'nodeSelector: {}'
+      - '# Constraint rook-ceph-operator Deployment to nodes with label `disktype: ssd`.'
+      - '# For more info, see https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector'
+      - '#  disktype: ssd'
+      - ""
+      - '# -- List of Kubernetes [`tolerations`](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to add to the Deployment.'
+      - 'tolerations: []'
+      - ""
+      - '# -- Delay to use for the `node.kubernetes.io/unreachable` pod failure toleration to override'
+      - '# the Kubernetes default of 5 minutes'
+      - 'unreachableNodeTolerationSeconds: 5'
+      - ""
+      - '# -- Whether the operator should watch cluster CRD in its own namespace or not'
+      - 'currentNamespaceOnly: false'
+      - ""
+      - '# -- Pod annotations'
+      - 'annotations: {}'
+      - ""
+      - '# -- Global log level for the operator.'
+      - '# Options: `ERROR`, `WARNING`, `INFO`, `DEBUG`'
+      - 'logLevel: INFO'
+      - ""
+      - '# -- If true, create & use RBAC resources'
+      - 'rbacEnable: true'
+      - ""
+      - 'rbacAggregate:'
+      - '  # -- If true, create a ClusterRole aggregated to [user facing roles](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles) for objectbucketclaims'
+      - '  enableOBCs: false'
+      - ""
+      - '# -- If true, create & use PSP resources'
+      - 'pspEnable: false'
+      - ""
+      - '# -- Set the priority class for the rook operator deployment if desired'
+      - 'priorityClassName:'
+      - ""
+      - '# -- Set the container security context for the operator'
+      - 'containerSecurityContext:'
+      - '  runAsNonRoot: true'
+      - '  runAsUser: 2016'
+      - '  runAsGroup: 2016'
+      - '  capabilities:'
+      - '    drop: ["ALL"]'
+      - '# -- If true, loop devices are allowed to be used for osds in test clusters'
+      - 'allowLoopDevices: false'
+      - ""
+      - '# Settings for whether to disable the drivers or other daemons if they are not'
+      - '# needed'
+      - 'csi:'
+      - '  # -- Enable Ceph CSI RBD driver'
+      - '  enableRbdDriver: true'
+      - '  # -- Enable Ceph CSI CephFS driver'
+      - '  enableCephfsDriver: true'
+      - '  # -- Enable host networking for CSI CephFS and RBD nodeplugins. This may be necessary'
+      - '  # in some network configurations where the SDN does not provide access to an external cluster or'
+      - '  # there is significant drop in read/write performance'
+      - '  enableCSIHostNetwork: true'
+      - '  # -- Enable Snapshotter in CephFS provisioner pod'
+      - '  enableCephfsSnapshotter: true'
+      - '  # -- Enable Snapshotter in NFS provisioner pod'
+      - '  enableNFSSnapshotter: true'
+      - '  # -- Enable Snapshotter in RBD provisioner pod'
+      - '  enableRBDSnapshotter: true'
+      - '  # -- Enable Host mount for `/etc/selinux` directory for Ceph CSI nodeplugins'
+      - '  enablePluginSelinuxHostMount: false'
+      - '  # -- Enable Ceph CSI PVC encryption support'
+      - '  enableCSIEncryption: false'
+      - ""
+      - '  # -- PriorityClassName to be set on csi driver plugin pods'
+      - '  pluginPriorityClassName: system-node-critical'
+      - ""
+      - '  # -- PriorityClassName to be set on csi driver provisioner pods'
+      - '  provisionerPriorityClassName: system-cluster-critical'
+      - ""
+      - '  # -- Policy for modifying a volume''s ownership or permissions when the RBD PVC is being mounted.'
+      - '  # supported values are documented at https://kubernetes-csi.github.io/docs/support-fsgroup.html'
+      - '  rbdFSGroupPolicy: "File"'
+      - ""
+      - '  # -- Policy for modifying a volume''s ownership or permissions when the CephFS PVC is being mounted.'
+      - '  # supported values are documented at https://kubernetes-csi.github.io/docs/support-fsgroup.html'
+      - '  cephFSFSGroupPolicy: "File"'
+      - ""
+      - '  # -- Policy for modifying a volume''s ownership or permissions when the NFS PVC is being mounted.'
+      - '  # supported values are documented at https://kubernetes-csi.github.io/docs/support-fsgroup.html'
+      - '  nfsFSGroupPolicy: "File"'
+      - ""
+      - '  # -- OMAP generator generates the omap mapping between the PV name and the RBD image'
+      - '  # which helps CSI to identify the rbd images for CSI operations.'
+      - '  # `CSI_ENABLE_OMAP_GENERATOR` needs to be enabled when we are using rbd mirroring feature.'
+      - '  # By default OMAP generator is disabled and when enabled, it will be deployed as a'
+      - '  # sidecar with CSI provisioner pod, to enable set it to true.'
+      - '  enableOMAPGenerator: false'
+      - ""
+      - '  # -- Set CephFS Kernel mount options to use https://docs.ceph.com/en/latest/man/8/mount.ceph/#options.'
+      - '  # Set to "ms_mode=secure" when connections.encrypted is enabled in CephCluster CR'
+      - '  cephFSKernelMountOptions:'
+      - ""
+      - '  # -- Enable adding volume metadata on the CephFS subvolumes and RBD images.'
+      - '  # Not all users might be interested in getting volume/snapshot details as metadata on CephFS subvolume and RBD images.'
+      - '  # Hence enable metadata is false by default'
+      - '  enableMetadata: false'
+      - ""
+      - '  # -- Set replicas for csi provisioner deployment'
+      - '  provisionerReplicas: 2'
+      - ""
+      - '  # -- Cluster name identifier to set as metadata on the CephFS subvolume and RBD images. This will be useful'
+      - '  # in cases like for example, when two container orchestrator clusters (Kubernetes/OCP) are using a single ceph cluster'
+      - '  clusterName:'
+      - ""
+      - '  # -- Set logging level for cephCSI containers maintained by the cephCSI.'
+      - '  # Supported values from 0 to 5. 0 for general useful logs, 5 for trace level verbosity.'
+      - '  logLevel: 0'
+      - ""
+      - '  # -- Set logging level for Kubernetes-csi sidecar containers.'
+      - '  # Supported values from 0 to 5. 0 for general useful logs (the default), 5 for trace level verbosity.'
+      - '  # @default -- `0`'
+      - '  sidecarLogLevel:'
+      - ""
+      - '  # -- CSI driver name prefix for cephfs, rbd and nfs.'
+      - '  # @default -- `namespace name where rook-ceph operator is deployed`'
+      - '  csiDriverNamePrefix:'
+      - ""
+      - '  # -- CSI RBD plugin daemonset update strategy, supported values are OnDelete and RollingUpdate'
+      - '  # @default -- `RollingUpdate`'
+      - '  rbdPluginUpdateStrategy:'
+      - ""
+      - '  # -- A maxUnavailable parameter of CSI RBD plugin daemonset update strategy.'
+      - '  # @default -- `1`'
+      - '  rbdPluginUpdateStrategyMaxUnavailable:'
+      - ""
+      - '  # -- CSI CephFS plugin daemonset update strategy, supported values are OnDelete and RollingUpdate'
+      - '  # @default -- `RollingUpdate`'
+      - '  cephFSPluginUpdateStrategy:'
+      - ""
+      - '  # -- A maxUnavailable parameter of CSI cephFS plugin daemonset update strategy.'
+      - '  # @default -- `1`'
+      - '  cephFSPluginUpdateStrategyMaxUnavailable:'
+      - ""
+      - '  # -- CSI NFS plugin daemonset update strategy, supported values are OnDelete and RollingUpdate'
+      - '  # @default -- `RollingUpdate`'
+      - '  nfsPluginUpdateStrategy:'
+      - ""
+      - '  # -- Set GRPC timeout for csi containers (in seconds). It should be >= 120. If this value is not set or is invalid, it defaults to 150'
+      - '  grpcTimeoutInSeconds: 150'
+      - ""
+      - '  # -- Allow starting an unsupported ceph-csi image'
+      - '  allowUnsupportedVersion: false'
+      - ""
+      - '  # -- The volume of the CephCSI RBD plugin DaemonSet'
+      - '  csiRBDPluginVolume:'
+      - '  #  - name: lib-modules'
+      - '  #    hostPath:'
+      - '  #      path: /run/booted-system/kernel-modules/lib/modules/'
+      - '  #  - name: host-nix'
+      - '  #    hostPath:'
+      - '  #      path: /nix'
+      - ""
+      - '  # -- The volume mounts of the CephCSI RBD plugin DaemonSet'
+      - '  csiRBDPluginVolumeMount:'
+      - '  #  - name: host-nix'
+      - '  #    mountPath: /nix'
+      - '  #    readOnly: true'
+      - ""
+      - '  # -- The volume of the CephCSI CephFS plugin DaemonSet'
+      - '  csiCephFSPluginVolume:'
+      - '  #  - name: lib-modules'
+      - '  #    hostPath:'
+      - '  #      path: /run/booted-system/kernel-modules/lib/modules/'
+      - '  #  - name: host-nix'
+      - '  #    hostPath:'
+      - '  #      path: /nix'
+      - ""
+      - '  # -- The volume mounts of the CephCSI CephFS plugin DaemonSet'
+      - '  csiCephFSPluginVolumeMount:'
+      - '  #  - name: host-nix'
+      - '  #    mountPath: /nix'
+      - '  #    readOnly: true'
+      - ""
+      - '  # -- CEPH CSI RBD provisioner resource requirement list'
+      - '  # csi-omap-generator resources will be applied only if `enableOMAPGenerator` is set to `true`'
+      - '  # @default -- see values.yaml'
+      - '  csiRBDProvisionerResource: |'
+      - '    - name : csi-provisioner'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-resizer'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-attacher'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-snapshotter'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-rbdplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : csi-omap-generator'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : liveness-prometheus'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - ""
+      - '  # -- CEPH CSI RBD plugin resource requirement list'
+      - '  # @default -- see values.yaml'
+      - '  csiRBDPluginResource: |'
+      - '    - name : driver-registrar'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-rbdplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : liveness-prometheus'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - ""
+      - '  # -- CEPH CSI CephFS provisioner resource requirement list'
+      - '  # @default -- see values.yaml'
+      - '  csiCephFSProvisionerResource: |'
+      - '    - name : csi-provisioner'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-resizer'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-attacher'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-snapshotter'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-cephfsplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : liveness-prometheus'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - ""
+      - '  # -- CEPH CSI CephFS plugin resource requirement list'
+      - '  # @default -- see values.yaml'
+      - '  csiCephFSPluginResource: |'
+      - '    - name : driver-registrar'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-cephfsplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : liveness-prometheus'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - ""
+      - '  # -- CEPH CSI NFS provisioner resource requirement list'
+      - '  # @default -- see values.yaml'
+      - '  csiNFSProvisionerResource: |'
+      - '    - name : csi-provisioner'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 100m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-nfsplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - '    - name : csi-attacher'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - ""
+      - '  # -- CEPH CSI NFS plugin resource requirement list'
+      - '  # @default -- see values.yaml'
+      - '  csiNFSPluginResource: |'
+      - '    - name : driver-registrar'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 128Mi'
+      - '          cpu: 50m'
+      - '        limits:'
+      - '          memory: 256Mi'
+      - '    - name : csi-nfsplugin'
+      - '      resource:'
+      - '        requests:'
+      - '          memory: 512Mi'
+      - '          cpu: 250m'
+      - '        limits:'
+      - '          memory: 1Gi'
+      - ""
+      - '  # Set provisionerTolerations and provisionerNodeAffinity for provisioner pod.'
+      - '  # The CSI provisioner would be best to start on the same nodes as other ceph daemons.'
+      - ""
+      - '  # -- Array of tolerations in YAML format which will be added to CSI provisioner deployment'
+      - '  provisionerTolerations:'
+      - '  #    - key: key'
+      - '  #      operator: Exists'
+      - '  #      effect: NoSchedule'
+      - ""
+      - '  # -- The node labels for affinity of the CSI provisioner deployment [^1]'
+      - '  provisionerNodeAffinity: #key1=value1,value2; key2=value3'
+      - '  # Set pluginTolerations and pluginNodeAffinity for plugin daemonset pods.'
+      - '  # The CSI plugins need to be started on all the nodes where the clients need to mount the storage.'
+      - ""
+      - '  # -- Array of tolerations in YAML format which will be added to CephCSI plugin DaemonSet'
+      - '  pluginTolerations:'
+      - '  #    - key: key'
+      - '  #      operator: Exists'
+      - '  #      effect: NoSchedule'
+      - ""
+      - '  # -- The node labels for affinity of the CephCSI RBD plugin DaemonSet [^1]'
+      - '  pluginNodeAffinity: # key1=value1,value2; key2=value3'
+      - ""
+      - '  # -- Enable Ceph CSI Liveness sidecar deployment'
+      - '  enableLiveness: false'
+      - ""
+      - '  # -- CSI CephFS driver metrics port'
+      - '  # @default -- `9081`'
+      - '  cephfsLivenessMetricsPort:'
+      - ""
+      - '  # -- CSI Addons server port'
+      - '  # @default -- `9070`'
+      - '  csiAddonsPort:'
+      - ""
+      - '  # -- Enable Ceph Kernel clients on kernel < 4.17. If your kernel does not support quotas for CephFS'
+      - '  # you may want to disable this setting. However, this will cause an issue during upgrades'
+      - '  # with the FUSE client. See the [upgrade guide](https://rook.io/docs/rook/v1.2/ceph-upgrade.html)'
+      - '  forceCephFSKernelClient: true'
+      - ""
+      - '  # -- Ceph CSI RBD driver metrics port'
+      - '  # @default -- `8080`'
+      - '  rbdLivenessMetricsPort:'
+      - ""
+      - '  serviceMonitor:'
+      - '    # -- Enable ServiceMonitor for Ceph CSI drivers'
+      - '    enabled: false'
+      - '    # -- Service monitor scrape interval'
+      - '    interval: 5s'
+      - '    # -- ServiceMonitor additional labels'
+      - '    labels: {}'
+      - '    # -- Use a different namespace for the ServiceMonitor'
+      - '    namespace:'
+      - ""
+      - '  # -- Kubelet root directory path (if the Kubelet uses a different path for the `--root-dir` flag)'
+      - '  # @default -- `/var/lib/kubelet`'
+      - '  kubeletDirPath:'
+      - ""
+      - '  # -- Duration in seconds that non-leader candidates will wait to force acquire leadership.'
+      - '  # @default -- `137s`'
+      - '  csiLeaderElectionLeaseDuration:'
+      - ""
+      - '  # -- Deadline in seconds that the acting leader will retry refreshing leadership before giving up.'
+      - '  # @default -- `107s`'
+      - '  csiLeaderElectionRenewDeadline:'
+      - ""
+      - '  # -- Retry period in seconds the LeaderElector clients should wait between tries of actions.'
+      - '  # @default -- `26s`'
+      - '  csiLeaderElectionRetryPeriod:'
+      - ""
+      - '  cephcsi:'
+      - '    # -- Ceph CSI image'
+      - '    # @default -- `quay.io/cephcsi/cephcsi:v3.10.2`'
+      - '    image:'
+      - ""
+      - '  registrar:'
+      - '    # -- Kubernetes CSI registrar image'
+      - '    # @default -- `registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.9.1`'
+      - '    image:'
+      - ""
+      - '  provisioner:'
+      - '    # -- Kubernetes CSI provisioner image'
+      - '    # @default -- `registry.k8s.io/sig-storage/csi-provisioner:v3.6.3`'
+      - '    image:'
+      - ""
+      - '  snapshotter:'
+      - '    # -- Kubernetes CSI snapshotter image'
+      - '    # @default -- `registry.k8s.io/sig-storage/csi-snapshotter:v6.3.2`'
+      - '    image:'
+      - ""
+      - '  attacher:'
+      - '    # -- Kubernetes CSI Attacher image'
+      - '    # @default -- `registry.k8s.io/sig-storage/csi-attacher:v4.4.2`'
+      - '    image:'
+      - ""
+      - '  resizer:'
+      - '    # -- Kubernetes CSI resizer image'
+      - '    # @default -- `registry.k8s.io/sig-storage/csi-resizer:v1.9.2`'
+      - '    image:'
+      - ""
+      - '  # -- Image pull policy'
+      - '  imagePullPolicy: IfNotPresent'
+      - ""
+      - '  # -- Labels to add to the CSI CephFS Deployments and DaemonSets Pods'
+      - '  cephfsPodLabels: #"key1=value1,key2=value2"'
+      - ""
+      - '  # -- Labels to add to the CSI NFS Deployments and DaemonSets Pods'
+      - '  nfsPodLabels: #"key1=value1,key2=value2"'
+      - ""
+      - '  # -- Labels to add to the CSI RBD Deployments and DaemonSets Pods'
+      - '  rbdPodLabels: #"key1=value1,key2=value2"'
+      - ""
+      - '  csiAddons:'
+      - '    # -- Enable CSIAddons'
+      - '    enabled: false'
+      - '    # -- CSIAddons Sidecar image'
+      - '    image: "quay.io/csiaddons/k8s-sidecar:v0.8.0"'
+      - ""
+      - '  nfs:'
+      - '    # -- Enable the nfs csi driver'
+      - '    enabled: false'
+      - ""
+      - '  topology:'
+      - '    # -- Enable topology based provisioning'
+      - '    enabled: false'
+      - '    # NOTE: the value here serves as an example and needs to be'
+      - '    # updated with node labels that define domains of interest'
+      - '    # -- domainLabels define which node labels to use as domains'
+      - '    # for CSI nodeplugins to advertise their domains'
+      - '    domainLabels:'
+      - '    # - kubernetes.io/hostname'
+      - '    # - topology.kubernetes.io/zone'
+      - '    # - topology.rook.io/rack'
+      - ""
+      - '  readAffinity:'
+      - '    # -- Enable read affinity for RBD volumes. Recommended to'
+      - '    # set to true if running kernel 5.8 or newer.'
+      - '    # @default -- `false`'
+      - '    enabled: false'
+      - '    # -- Define which node labels to use'
+      - '    # as CRUSH location. This should correspond to the values set'
+      - '    # in the CRUSH map.'
+      - '    # @default -- labels listed [here](../CRDs/Cluster/ceph-cluster-crd.md#osd-topology)'
+      - '    crushLocationLabels:'
+      - ""
+      - '  # -- Whether to skip any attach operation altogether for CephFS PVCs. See more details'
+      - '  # [here](https://kubernetes-csi.github.io/docs/skip-attach.html#skip-attach-with-csi-driver-object).'
+      - '  # If cephFSAttachRequired is set to false it skips the volume attachments and makes the creation'
+      - '  # of pods using the CephFS PVC fast. **WARNING** It''s highly discouraged to use this for'
+      - '  # CephFS RWO volumes. Refer to this [issue](https://github.com/kubernetes/kubernetes/issues/103305) for more details.'
+      - '  cephFSAttachRequired: true'
+      - '  # -- Whether to skip any attach operation altogether for RBD PVCs. See more details'
+      - '  # [here](https://kubernetes-csi.github.io/docs/skip-attach.html#skip-attach-with-csi-driver-object).'
+      - '  # If set to false it skips the volume attachments and makes the creation of pods using the RBD PVC fast.'
+      - '  # **WARNING** It''s highly discouraged to use this for RWO volumes as it can cause data corruption.'
+      - '  # csi-addons operations like Reclaimspace and PVC Keyrotation will also not be supported if set'
+      - '  # to false since we''ll have no VolumeAttachments to determine which node the PVC is mounted on.'
+      - '  # Refer to this [issue](https://github.com/kubernetes/kubernetes/issues/103305) for more details.'
+      - '  rbdAttachRequired: true'
+      - '  # -- Whether to skip any attach operation altogether for NFS PVCs. See more details'
+      - '  # [here](https://kubernetes-csi.github.io/docs/skip-attach.html#skip-attach-with-csi-driver-object).'
+      - '  # If cephFSAttachRequired is set to false it skips the volume attachments and makes the creation'
+      - '  # of pods using the NFS PVC fast. **WARNING** It''s highly discouraged to use this for'
+      - '  # NFS RWO volumes. Refer to this [issue](https://github.com/kubernetes/kubernetes/issues/103305) for more details.'
+      - '  nfsAttachRequired: true'
+      - ""
+      - '# -- Enable discovery daemon'
+      - 'enableDiscoveryDaemon: false'
+      - '# -- Set the discovery daemon device discovery interval (default to 60m)'
+      - 'discoveryDaemonInterval: 60m'
+      - ""
+      - '# -- The timeout for ceph commands in seconds'
+      - 'cephCommandsTimeoutSeconds: "15"'
+      - ""
+      - '# -- If true, run rook operator on the host network'
+      - 'useOperatorHostNetwork:'
+      - ""
+      - '# -- If true, scale down the rook operator.'
+      - '# This is useful for administrative actions where the rook operator must be scaled down, while using gitops style tooling'
+      - '# to deploy your helm charts.'
+      - 'scaleDownOperator: false'
+      - ""
+      - '## Rook Discover configuration'
+      - '## toleration: NoSchedule, PreferNoSchedule or NoExecute'
+      - '## tolerationKey: Set this to the specific key of the taint to tolerate'
+      - '## tolerations: Array of tolerations in YAML format which will be added to agent deployment'
+      - '## nodeAffinity: Set to labels of the node to match'
+      - ""
+      - 'discover:'
+      - '  # -- Toleration for the discover pods.'
+      - '  # Options: `NoSchedule`, `PreferNoSchedule` or `NoExecute`'
+      - '  toleration:'
+      - '  # -- The specific key of the taint to tolerate'
+      - '  tolerationKey:'
+      - '  # -- Array of tolerations in YAML format which will be added to discover deployment'
+      - '  tolerations:'
+      - '  #   - key: key'
+      - '  #     operator: Exists'
+      - '  #     effect: NoSchedule'
+      - '  # -- The node labels for affinity of `discover-agent` [^1]'
+      - '  nodeAffinity: # key1=value1,value2; key2=value3'
+      - '  # -- Labels to add to the discover pods'
+      - '  podLabels: # "key1=value1,key2=value2"'
+      - '  # -- Add resources to discover daemon pods'
+      - '  resources:'
+      - '  #   - limits:'
+      - '  #       memory: 512Mi'
+      - '  #   - requests:'
+      - '  #       cpu: 100m'
+      - '  #       memory: 128Mi'
+      - ""
+      - '# -- Runs Ceph Pods as privileged to be able to write to `hostPaths` in OpenShift with SELinux restrictions.'
+      - 'hostpathRequiresPrivileged: false'
+      - ""
+      - '# -- Disable automatic orchestration when new devices are discovered.'
+      - 'disableDeviceHotplug: false'
+      - ""
+      - '# -- Blacklist certain disks according to the regex provided.'
+      - 'discoverDaemonUdev:'
+      - ""
+      - '# -- imagePullSecrets option allow to pull docker images from private docker registry. Option will be passed to all service accounts.'
+      - 'imagePullSecrets:'
+      - '# - name: my-registry-secret'
+      - ""
+      - '# -- Whether the OBC provisioner should watch on the operator namespace or not, if not the namespace of the cluster will be used'
+      - 'enableOBCWatchOperatorNamespace: true'
+      - ""
+      - 'monitoring:'
+      - '  # -- Enable monitoring. Requires Prometheus to be pre-installed.'
+      - '  # Enabling will also create RBAC rules to allow Operator to create ServiceMonitors'
+      - '  enabled: false'
+    stylingDirectives:
+      - - start: 0
+          end: 39
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 32
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 53
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - []
+      - - start: 0
+          end: 5
+          cssClass: pl-ent
+      - - start: 2
+          end: 12
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 23
+          cssClass: pl-s
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 5
+          cssClass: pl-ent
+        - start: 7
+          end: 13
+          cssClass: pl-s
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 26
+          cssClass: pl-s
+      - []
+      - - start: 0
+          end: 4
+          cssClass: pl-ent
+      - - start: 2
+          end: 91
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 57
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 45
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 132
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 20
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 9
+          cssClass: pl-ent
+        - start: 11
+          end: 15
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 35
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 9
+          cssClass: pl-ent
+      - - start: 2
+          end: 8
+          cssClass: pl-ent
+      - - start: 4
+          end: 10
+          cssClass: pl-ent
+        - start: 12
+          end: 17
+          cssClass: pl-s
+      - - start: 2
+          end: 10
+          cssClass: pl-ent
+      - - start: 4
+          end: 7
+          cssClass: pl-ent
+        - start: 9
+          end: 13
+          cssClass: pl-c1
+      - - start: 4
+          end: 10
+          cssClass: pl-ent
+        - start: 12
+          end: 17
+          cssClass: pl-s
+      - []
+      - - start: 0
+          end: 139
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 16
+          cssClass: pl-s
+      - - start: 0
+          end: 79
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 100
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 16
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - []
+      - - start: 0
+          end: 144
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 15
+          cssClass: pl-s
+      - []
+      - - start: 0
+          end: 93
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 37
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 32
+          cssClass: pl-ent
+        - start: 34
+          end: 35
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 78
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 20
+          cssClass: pl-ent
+        - start: 22
+          end: 27
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 20
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 15
+          cssClass: pl-s
+      - []
+      - - start: 0
+          end: 39
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 46
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 8
+          cssClass: pl-ent
+        - start: 10
+          end: 14
+          cssClass: pl-s
+      - []
+      - - start: 0
+          end: 41
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 10
+          cssClass: pl-ent
+        - start: 12
+          end: 16
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 13
+          cssClass: pl-ent
+      - - start: 2
+          end: 174
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 19
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 40
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 9
+          cssClass: pl-ent
+        - start: 11
+          end: 16
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 71
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 17
+          cssClass: pl-ent
+      - []
+      - - start: 0
+          end: 56
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 24
+          cssClass: pl-ent
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+        - start: 16
+          end: 20
+          cssClass: pl-c1
+      - - start: 2
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 17
+          cssClass: pl-c1
+      - - start: 2
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 18
+          cssClass: pl-c1
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+      - - start: 4
+          end: 8
+          cssClass: pl-ent
+        - start: 10
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 75
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 16
+          cssClass: pl-ent
+        - start: 18
+          end: 23
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 78
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 8
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 3
+          cssClass: pl-ent
+      - - start: 2
+          end: 33
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 17
+          cssClass: pl-ent
+        - start: 19
+          end: 23
+          cssClass: pl-c1
+      - - start: 2
+          end: 36
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 20
+          cssClass: pl-ent
+        - start: 22
+          end: 26
+          cssClass: pl-c1
+      - - start: 2
+          end: 87
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 98
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 55
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 28
+          cssClass: pl-c1
+      - - start: 2
+          end: 51
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 31
+          cssClass: pl-c1
+      - - start: 2
+          end: 48
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 28
+          cssClass: pl-c1
+      - - start: 2
+          end: 48
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 28
+          cssClass: pl-c1
+      - - start: 2
+          end: 78
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 30
+          cssClass: pl-ent
+        - start: 32
+          end: 37
+          cssClass: pl-c1
+      - - start: 2
+          end: 45
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-ent
+        - start: 23
+          end: 28
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 60
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 47
+          cssClass: pl-s
+      - []
+      - - start: 2
+          end: 65
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 30
+          cssClass: pl-ent
+        - start: 32
+          end: 55
+          cssClass: pl-s
+      - []
+      - - start: 2
+          end: 98
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 18
+          cssClass: pl-ent
+        - start: 20
+          end: 26
+          cssClass: pl-s
+        - start: 20
+          end: 21
+          cssClass: pl-pds
+        - start: 25
+          end: 26
+          cssClass: pl-pds
+      - []
+      - - start: 2
+          end: 101
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-ent
+        - start: 23
+          end: 29
+          cssClass: pl-s
+        - start: 23
+          end: 24
+          cssClass: pl-pds
+        - start: 28
+          end: 29
+          cssClass: pl-pds
+      - []
+      - - start: 2
+          end: 98
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 18
+          cssClass: pl-ent
+        - start: 20
+          end: 26
+          cssClass: pl-s
+        - start: 20
+          end: 21
+          cssClass: pl-pds
+        - start: 25
+          end: 26
+          cssClass: pl-pds
+      - []
+      - - start: 2
+          end: 86
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 66
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 92
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 84
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 63
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-ent
+        - start: 23
+          end: 28
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 104
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 83
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 26
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 77
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 120
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 45
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-ent
+        - start: 18
+          end: 23
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 50
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-ent
+        - start: 23
+          end: 24
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 109
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 120
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 13
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 74
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 89
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 10
+          cssClass: pl-ent
+        - start: 12
+          end: 13
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 63
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 103
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 17
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 54
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 69
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 96
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 78
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 39
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 99
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 28
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 81
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 42
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 96
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 136
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 27
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 51
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 32
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 53
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 20
+          cssClass: pl-ent
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 61
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 60
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 56
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 23
+          cssClass: pl-ent
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 61
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 63
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 28
+          cssClass: pl-ent
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 57
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 95
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 27
+          cssClass: pl-ent
+        - start: 29
+          end: 30
+          cssClass: pl-s
+      - - start: 0
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 24
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 25
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 26
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 31
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 32
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 52
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 25
+          cssClass: pl-s
+      - - start: 0
+          end: 29
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 26
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 32
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 60
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 30
+          cssClass: pl-ent
+        - start: 32
+          end: 33
+          cssClass: pl-s
+      - - start: 0
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 24
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 25
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 29
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 32
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 55
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 29
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 29
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 32
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 57
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 27
+          cssClass: pl-ent
+        - start: 29
+          end: 30
+          cssClass: pl-s
+      - - start: 0
+          end: 28
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 26
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 25
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 52
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 31
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 25
+          cssClass: pl-s
+      - - start: 0
+          end: 29
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 18
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 26
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 17
+          cssClass: pl-s
+      - - start: 0
+          end: 23
+          cssClass: pl-s
+      - - start: 0
+          end: 19
+          cssClass: pl-s
+      - - start: 0
+          end: 15
+          cssClass: pl-s
+      - - start: 0
+          end: 21
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+      - - start: 0
+          end: 0
+          cssClass: pl-s
+        - start: 2
+          end: 79
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 87
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 92
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 24
+          cssClass: pl-ent
+      - - start: 2
+          end: 17
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 27
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 74
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 59
+          cssClass: pl-c
+        - start: 27
+          end: 28
+          cssClass: pl-c
+      - - start: 2
+          end: 75
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 100
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 90
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-ent
+      - - start: 2
+          end: 17
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 27
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 76
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 20
+          cssClass: pl-ent
+        - start: 22
+          end: 55
+          cssClass: pl-c
+        - start: 22
+          end: 23
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 50
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-ent
+        - start: 18
+          end: 23
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 37
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 27
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 29
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 15
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 101
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 91
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 99
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 25
+          cssClass: pl-ent
+        - start: 27
+          end: 31
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 39
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 24
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 16
+          cssClass: pl-ent
+      - - start: 4
+          end: 51
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 18
+          cssClass: pl-c1
+      - - start: 4
+          end: 40
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 12
+          cssClass: pl-ent
+        - start: 14
+          end: 16
+          cssClass: pl-c1
+      - - start: 4
+          end: 41
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 10
+          cssClass: pl-ent
+        - start: 12
+          end: 14
+          cssClass: pl-s
+      - - start: 4
+          end: 57
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 13
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 99
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 34
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 16
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 92
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 32
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 100
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 32
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 94
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 21
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 30
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 9
+          cssClass: pl-ent
+      - - start: 4
+          end: 23
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 51
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 11
+          cssClass: pl-ent
+      - - start: 4
+          end: 39
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 80
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 13
+          cssClass: pl-ent
+      - - start: 4
+          end: 41
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 70
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 13
+          cssClass: pl-ent
+      - - start: 4
+          end: 41
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 70
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 10
+          cssClass: pl-ent
+      - - start: 4
+          end: 38
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 67
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 9
+          cssClass: pl-ent
+      - - start: 4
+          end: 37
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 66
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 17
+          cssClass: pl-ent
+        - start: 19
+          end: 31
+          cssClass: pl-s
+      - []
+      - - start: 2
+          end: 70
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 17
+          cssClass: pl-ent
+        - start: 19
+          end: 45
+          cssClass: pl-c
+        - start: 19
+          end: 20
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 67
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+        - start: 16
+          end: 42
+          cssClass: pl-c
+        - start: 16
+          end: 17
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 67
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+        - start: 16
+          end: 42
+          cssClass: pl-c
+        - start: 16
+          end: 17
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 11
+          cssClass: pl-ent
+      - - start: 4
+          end: 25
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 18
+          cssClass: pl-c1
+      - - start: 4
+          end: 32
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 9
+          cssClass: pl-ent
+        - start: 11
+          end: 49
+          cssClass: pl-s
+        - start: 11
+          end: 12
+          cssClass: pl-pds
+        - start: 48
+          end: 49
+          cssClass: pl-pds
+      - []
+      - - start: 2
+          end: 5
+          cssClass: pl-ent
+      - - start: 4
+          end: 34
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 18
+          cssClass: pl-c1
+      - []
+      - - start: 2
+          end: 10
+          cssClass: pl-ent
+      - - start: 4
+          end: 43
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 18
+          cssClass: pl-c1
+      - - start: 4
+          end: 63
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 62
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 64
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 52
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 16
+          cssClass: pl-ent
+      - - start: 4
+          end: 30
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 35
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 29
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - []
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+      - - start: 4
+          end: 61
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 49
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 25
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 18
+          cssClass: pl-c1
+      - - start: 4
+          end: 40
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 65
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 23
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 88
+          cssClass: pl-c
+        - start: 4
+          end: 5
+          cssClass: pl-c
+      - - start: 4
+          end: 23
+          cssClass: pl-ent
+      - []
+      - - start: 2
+          end: 88
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 102
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 98
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 90
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 119
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 22
+          cssClass: pl-ent
+        - start: 24
+          end: 28
+          cssClass: pl-c1
+      - - start: 2
+          end: 85
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 102
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 106
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 100
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 97
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 99
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-ent
+        - start: 21
+          end: 25
+          cssClass: pl-c1
+      - - start: 2
+          end: 85
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 102
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 98
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 87
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 116
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-ent
+        - start: 21
+          end: 25
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 28
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 21
+          cssClass: pl-ent
+        - start: 23
+          end: 28
+          cssClass: pl-c1
+      - - start: 0
+          end: 72
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 23
+          cssClass: pl-ent
+        - start: 25
+          end: 28
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 45
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 26
+          cssClass: pl-ent
+        - start: 28
+          end: 32
+          cssClass: pl-s
+        - start: 28
+          end: 29
+          cssClass: pl-pds
+        - start: 31
+          end: 32
+          cssClass: pl-pds
+      - []
+      - - start: 0
+          end: 51
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 22
+          cssClass: pl-ent
+      - []
+      - - start: 0
+          end: 43
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 121
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 29
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 17
+          cssClass: pl-ent
+        - start: 19
+          end: 24
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 30
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 56
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 71
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 91
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 51
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - []
+      - - start: 0
+          end: 8
+          cssClass: pl-ent
+      - - start: 2
+          end: 40
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 60
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 12
+          cssClass: pl-ent
+      - - start: 2
+          end: 48
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 15
+          cssClass: pl-ent
+      - - start: 2
+          end: 85
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 13
+          cssClass: pl-ent
+      - - start: 2
+          end: 16
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 24
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 26
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 60
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 14
+          cssClass: pl-ent
+        - start: 16
+          end: 49
+          cssClass: pl-c
+        - start: 16
+          end: 17
+          cssClass: pl-c
+      - - start: 2
+          end: 41
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 11
+          cssClass: pl-ent
+        - start: 13
+          end: 40
+          cssClass: pl-c
+        - start: 13
+          end: 14
+          cssClass: pl-c
+      - - start: 2
+          end: 44
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 11
+          cssClass: pl-ent
+      - - start: 2
+          end: 15
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 23
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 17
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 19
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 23
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - []
+      - - start: 0
+          end: 108
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 26
+          cssClass: pl-ent
+        - start: 28
+          end: 33
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 69
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 20
+          cssClass: pl-ent
+        - start: 22
+          end: 27
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 61
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 18
+          cssClass: pl-ent
+      - []
+      - - start: 0
+          end: 133
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 16
+          cssClass: pl-ent
+      - - start: 0
+          end: 28
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - []
+      - - start: 0
+          end: 128
+          cssClass: pl-c
+        - start: 0
+          end: 1
+          cssClass: pl-c
+      - - start: 0
+          end: 31
+          cssClass: pl-ent
+        - start: 33
+          end: 37
+          cssClass: pl-c1
+      - []
+      - - start: 0
+          end: 10
+          cssClass: pl-ent
+      - - start: 2
+          end: 66
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 84
+          cssClass: pl-c
+        - start: 2
+          end: 3
+          cssClass: pl-c
+      - - start: 2
+          end: 9
+          cssClass: pl-ent
+        - start: 11
+          end: 16
+          cssClass: pl-c1
+    csv: null
+    csvError: null
+    dependabotInfo:
+      showConfigurationBanner: false
+      configFilePath: null
+      networkDependabotPath: /rook/rook/network/updates
+      dismissConfigurationNoticePath: /settings/dismiss-notice/dependabot_configuration_notice
+      configurationNoticeDismissed: null
+      repoAlertsPath: /rook/rook/security/dependabot
+      repoSecurityAndAnalysisPath: /rook/rook/settings/security_analysis
+      repoOwnerIsOrg: true
+      currentUserCanAdminRepo: false
+    displayName: values.yaml
+    displayUrl: https://github.com/rook/rook/blob/release-1.13/deploy/charts/rook-ceph/values.yaml?raw=true
+    headerInfo:
+      blobSize: 20.7 KB
+      deleteInfo:
+        deleteTooltip: You must be signed in to make or propose changes
+      editInfo:
+        editTooltip: You must be signed in to make or propose changes
+      ghDesktopPath: https://desktop.github.com
+      gitLfsPath: null
+      onBranch: true
+      shortPath: a1144b8
+      siteNavLoginPath: /login?return_to=https%3A%2F%2Fgithub.com%2Frook%2Frook%2Fblob%2Frelease-1.13%2Fdeploy%2Fcharts%2Frook-ceph%2Fvalues.yaml
+      isCSV: false
+      isRichtext: false
+      toc: null
+      lineInfo:
+        truncatedLoc: "630"
+        truncatedSloc: "543"
+      mode: file
+    image: false
+    isCodeownersFile: null
+    isPlain: false
+    isValidLegacyIssueTemplate: false
+    issueTemplateHelpUrl: https://docs.github.com/articles/about-issue-and-pull-request-templates
+    issueTemplate: null
+    discussionTemplate: null
+    language: YAML
+    languageID: 407
+    large: false
+    loggedIn: false
+    newDiscussionPath: /rook/rook/discussions/new
+    newIssuePath: /rook/rook/issues/new
+    planSupportInfo:
+      repoIsFork: null
+      repoOwnedByCurrentUser: null
+      requestFullPath: /rook/rook/blob/release-1.13/deploy/charts/rook-ceph/values.yaml
+      showFreeOrgGatedFeatureMessage: null
+      showPlanSupportBanner: null
+      upgradeDataAttributes: null
+      upgradePath: null
+    publishBannersInfo:
+      dismissActionNoticePath: /settings/dismiss-notice/publish_action_from_dockerfile
+      releasePath: /rook/rook/releases/new?marketplace=true
+      showPublishActionBanner: false
+    rawBlobUrl: https://github.com/rook/rook/raw/release-1.13/deploy/charts/rook-ceph/values.yaml
+    renderImageOrRaw: false
+    richText: null
+    renderedFileInfo: null
+    shortPath: null
+    symbolsEnabled: true
+    tabSize: 8
+    topBannersInfo:
+      overridingGlobalFundingFile: false
+      globalPreferredFundingPath: null
+      repoOwner: rook
+      repoName: rook
+      showInvalidCitationWarning: false
+      citationHelpUrl: https://docs.github.com/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/about-citation-files
+      showDependabotConfigurationBanner: false
+      actionsOnboardingTip: null
+    truncated: false
+    viewable: true
+    workflowRedirectUrl: null
+    symbols:
+      timed_out: false
+      not_analyzed: true
+      symbols: []
+  copilotInfo: null
+  copilotAccessAllowed: false
+  csrf_tokens:
+    /rook/rook/branches:
+      post: Tvq1muGJ79EHV5a8iTGd9F540uemXfbDPcIiuRTUVWWfOj6RALwZ8SBFTueDiMVoYGUABVqGXmk2v89H20ovCg
+    /repos/preferences:
+      post: qiQm57YvcZ9ruqfJsJzriBSoPvkcFk56Op_mEfNclofAiTxur3how7FbiDIIDFqTK2ZlHePa7BXfOPM3jB3YJA
+title: rook/deploy/charts/rook-ceph/values.yaml at release-1.13 · rook/rook
